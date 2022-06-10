@@ -1,16 +1,49 @@
 import socket
+from threading import Thread
 
 host = 'localhost'
-port = 8000
+port = 8080
+
+clients = {}
+
+addresses = {}
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((host, port))
 
-sock.listen(1)
-print("The server is running and is listening to client requests")
 
-conn, address = sock.accept()
+def handle_clients(conn, adress):
+    name = conn.recv(1024).decode()
+    welcome = "Welcome" + name + ". You can type #quit if you ever want to leave the Chat Room."
+    conn.recv(bytes(welcome, "utf8"))
+    msg = name + "Has recently joined to the Chat Room."
+    broadcast(bytes(msg, "utf8"))
+    clients[conn] = name
 
-message = "Hey there is something important for you"
-conn.send(message.encode())
-conn.close()
+    while True:
+        msg = conn.recv(1024)
+        if msg != bytes("#quit", "utf8"):
+            broadcast(msg, name + ":")
+        else:
+            conn.send(bytes("#quit", "utf8"))
+            conn.close()
+            del clients[conn]
+            bradcast(bytes(name + "Has left the Chat Room."))
+
+def accept_client_connections():
+    while True:
+        client_conn, client_address = sock.accept()
+        print(client_address, "Has Connected")
+        client_conn.send("Welcome to the Chat Room, Please Type your name to continue".encode('utf8'))
+        addresses[client_conn] = client_address
+
+        Thread(target=handle_clients, args=(client_conn, client_address)).start()
+
+
+if __name__ == "__main__":
+    sock.listen(5)
+    print("The server is running and is listening to clients requests")
+
+    t1 = Thread(target=accept_client_connections)
+    t1.start()
+    t1.join()
