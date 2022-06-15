@@ -1,6 +1,6 @@
 # Chat Room Application
 
-## As the name says, this is a python application of for a chat room:
+### As the name says, this is a python application of for a chat room:
 
 * Run in a local server 
 * To use this app you will just have to manually run de file "Server.py", and then each one of the pyhton files with the "Client_#.py" name path.
