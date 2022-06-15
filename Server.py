@@ -14,21 +14,21 @@ sock.bind((host, port))
 
 def handle_clients(conn, adress):
     name = conn.recv(1024).decode()
-    welcome = "Welcome" + name + ". You can type #quit if you ever want to leave the Chat Room."
-    conn.recv(bytes(welcome, "utf8"))
-    msg = name + "Has recently joined to the Chat Room."
+    welcome = "Welcome " + name + "! You can type #quit if you ever want to leave the Chat Room."
+    conn.send(bytes(welcome, "utf8"))
+    msg = name + " Has recently joined to the Chat Room."
     broadcast(bytes(msg, "utf8"))
     clients[conn] = name
 
     while True:
         msg = conn.recv(1024)
         if msg != bytes("#quit", "utf8"):
-            broadcast(msg, name + ":")
+            broadcast(msg, name + ": ")
         else:
             conn.send(bytes("#quit", "utf8"))
             conn.close()
-            del clients[conn]
             broadcast(bytes(name + "Has left the Chat Room."))
+            del clients[conn]
 
 
 def accept_client_connections():
