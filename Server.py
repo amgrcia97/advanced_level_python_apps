@@ -28,16 +28,26 @@ def handle_clients(conn, adress):
             conn.send(bytes("#quit", "utf8"))
             conn.close()
             del clients[conn]
-            bradcast(bytes(name + "Has left the Chat Room."))
+            broadcast(bytes(name + "Has left the Chat Room."))
+
 
 def accept_client_connections():
     while True:
         client_conn, client_address = sock.accept()
         print(client_address, "Has Connected")
-        client_conn.send("Welcome to the Chat Room, Please Type your name to continue".encode('utf8'))
+        client_conn.send(
+            "Welcome to the Chat Room, Please Type your name to continue"
+            .encode('utf8'))
         addresses[client_conn] = client_address
 
-        Thread(target=handle_clients, args=(client_conn, client_address)).start()
+        Thread(
+            target=handle_clients,
+            args=(client_conn, client_address)).start()
+
+
+def broadcast(msg, prefix=""):
+    for x in clients:
+        x.send(bytes(prefix, "utf8") + msg)
 
 
 if __name__ == "__main__":
