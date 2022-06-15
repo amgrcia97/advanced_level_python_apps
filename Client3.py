@@ -6,11 +6,11 @@ from threading import Thread
 
 def receive():
     while True:
-        # try:
-        msg = s.recv(1024).decode("utf8")
-        msg_list.insert(tkinter.END, msg)
-        # except:
-        print("There is an Error Receiving the Message")
+        try:
+            msg = s.recv(1024).decode("utf8")
+            msg_list.insert(tkinter.END, msg)
+        except:
+            print("There is an Error Receiving the Message")
 
 def send():
     msg = my_msg.get()
