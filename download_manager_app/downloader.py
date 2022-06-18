@@ -180,25 +180,27 @@ class DowloadApp:
         self.progress_bar.start()
 
         threading.Thread(
-            target=self.yt.register_on_progress_callback(self.on_progress)).start()
+            target=self.yt.register_on_progress_callback(
+                self.on_progress)).start()
 
         threading.Thread(target=self.download_file).start()
 
     def download_file(self):
         if self.choices == '1':
-            print('downloading')
             self.yt.streams.filter(
                 only_audio=True).first().download(self.folder_name)
 
         if self.choices == '2':
-            print('downloading')
-            self.yt.streams.filter(progressive=True, file_extension='mp4').first().download(self.folder_name)
+            self.yt.streams.filter(
+                progressive=True,
+                file_extension='mp4').first().download(self.folder_name)
 
     def on_progress(self, stream=None, chunks=None, bytes_remaining=None):
 
         print('bytes_remaining: ', bytes_remaining)
         print('total: ', self.max_file_size)
-        self.percent_count = float("%0.2f" % (100-(((bytes_remaining*10)/self.max_file_size))))
+        self.percent_count = float(
+            "%0.2f" % (100-(((bytes_remaining*10)/self.max_file_size))))
         print('percent: ', self.percent_count)
 
         if (self.percent_count < 100.00):

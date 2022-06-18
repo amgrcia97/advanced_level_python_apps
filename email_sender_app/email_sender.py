@@ -1,7 +1,16 @@
-from tkinter import *
+from pickle import NONE
+from tkinter import (
+    E,
+    END,
+    NO,
+    TOP,
+    Button,
+    Entry,
+    Frame,
+    Label,
+    Tk)
 import smtplib
 import re
-from turtle import width
 
 
 def login():
@@ -39,13 +48,16 @@ def send_mail():
         reciever = str(entry_3.get())
         subject = str(entry_4.get())
         msg_body = str(entry_5.get())
-        msg = 'From: ' + username + '\n' + 'To: ' + reciever + '\n' + 'Subject: ' + subject + '\n' + msg_body
+        msg = (
+            'From: ' + username +
+            '\n' + 'To: ' + reciever +
+            '\n' + 'Subject: ' + subject + '\n' + msg_body)
         try:
             server.sendmail(username, reciever, msg)
             label_9.grid()
             label_9['text'] = 'Mail Sent!'
             root.after(10, label_9.grid)
-        except Exception as e:
+        except Exception:
             label_9.grid()
             label_9['text'] = 'Error in Sending your Email!'
             root.after(10, label_9.grid)
@@ -62,7 +74,7 @@ def logout():
         f_1.pack()
         entry_2.delete(0, END)
         root.after(10, root.grid)
-    except Exception as e:
+    except Exception:
         label_4['text'] = 'Error in logout'
 
 
@@ -105,7 +117,7 @@ def validate_message():
             label_9.grid()
             label_9['text'] = 'Enter a valid email please.'
             root.after(10, root.grid)
-            return False  
+            return False
         elif len(sub_text) < 3 or len(msg_text) < 3:
             label_9.grid()
             label_9['text'] = 'Enter atleast e characters please.'
@@ -121,7 +133,11 @@ root.title('Email Application')
 f_1 = Frame(root, width=1000, height=800)
 f_1.pack(side=TOP)
 
-label_1 = Label(f_1, width=25, text='Enter your Credentials', font=('Calibri 18 bold'))
+label_1 = Label(
+    f_1,
+    width=25,
+    text='Enter your Credentials',
+    font=('Calibri 18 bold'))
 label_1.grid(row=0, columnspan=3, pady=10, padx=10)
 
 label_2 = Label(f_1, text='Email').grid(row=1, sticky=E, pady=5, padx=10)
@@ -134,17 +150,34 @@ entry_1.grid(row=1, column=1, pady=5)
 entry_2 = Entry(f_1, show='*')
 entry_2.grid(row=2, column=1)
 
-btn_1 = Button(f_1, text='Login', width=10, bg='black', fg='white', command=lambda:login())
+btn_1 = Button(
+    f_1,
+    text='Login',
+    width=10,
+    bg='black',
+    fg='white',
+    command=lambda: login())
 btn_1.grid(row=3, columnspan=3, pady=10)
 
 f_2 = Frame(root)
 f_2.pack(side=TOP, expand=NO, fill=NONE)
 
-label_4 = Label(f_2, width=20, bg='cyan', fg='red', text='Log in Success', font=('Calibri 18 bold'))
+label_4 = Label(
+    f_2,
+    width=20,
+    bg='cyan',
+    fg='red',
+    text='Log in Success',
+    font=('Calibri 18 bold'))
 label_4.grid(row=0, column=0, columnspan=2, pady=5)
 
 
-btn_2 =  Button(f_2, text='Logout', bg='black', fg='white', command=lambda:logout())
+btn_2 = Button(
+    f_2,
+    text='Logout',
+    bg='black',
+    fg='white',
+    command=lambda: logout())
 btn_2.grid(row=0, column=4, sticky=E, pady=10, padx=(5, 0))
 
 f_3 = Frame(master=root)
@@ -166,10 +199,21 @@ entry_4.grid(row=2, column=1, pady=5)
 entry_5 = Entry(f_3)
 entry_5.grid(row=3, column=1, pady=5, rowspan=3, ipady=10)
 
-btn_3 = Button(f_3, text='Send Mail', width=10, bg='black', fg='white', command=lambda:send_mail())
+btn_3 = Button(
+    f_3,
+    text='Send Mail',
+    width=10,
+    bg='black',
+    fg='white',
+    command=lambda: send_mail())
 btn_3.grid(row=6, columnspan=3, pady=10)
 
-label_9 = Label(f_3, width=20, fg='white', bg='black', font=('Calibri 18 bold'))
+label_9 = Label(
+    f_3,
+    width=20,
+    fg='white',
+    bg='black',
+    font=('Calibri 18 bold'))
 label_9.grid(row=7, columnspan=3, pady=5)
 
 hide_login_label()

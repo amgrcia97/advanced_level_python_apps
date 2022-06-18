@@ -1,6 +1,19 @@
 import tkinter
 import socket
-from tkinter import *
+from tkinter import (
+    BOTH,
+    LEFT,
+    RIGHT,
+    Y,
+    Button,
+    Entry,
+    Frame,
+    Label,
+    Listbox,
+    Scrollbar,
+    StringVar,
+    Tk,
+    mainloop)
 from threading import Thread
 
 
@@ -9,8 +22,9 @@ def receive():
         try:
             msg = s.recv(1024).decode("utf8")
             msg_list.insert(tkinter.END, msg)
-        except:
+        except Exception:
             print("There is an Error Receiving the Message")
+
 
 def send():
     msg = my_msg.get()
@@ -20,9 +34,11 @@ def send():
         s.close()
         window.destroy()
 
+
 def on_clossing():
     my_msg.set("#quit")
     send()
+
 
 window = Tk()
 window.title("Chat Room Application")
@@ -37,22 +53,34 @@ my_msg.set("")
 
 scrollbar = Scrollbar(message_frame)
 
-msg_list = Listbox(message_frame, height=15, width=100, bg="grey", yscrollcommand=scrollbar.set)
+msg_list = Listbox(
+    message_frame,
+    height=15,
+    width=100,
+    bg="grey",
+    yscrollcommand=scrollbar.set)
 
 scrollbar.pack(side=RIGHT, fill=Y)
 msg_list.pack(side=LEFT, fill=BOTH)
 msg_list.pack()
 
-label = Label(window, text="Enter the Message", fg="blue", font="NORMAL", bg="white")
+label = Label(
+    window,
+    text="Enter the Message",
+    fg="blue",
+    font="NORMAL",
+    bg="white")
 label.pack()
 
-entry_field =  Entry(window, textvariable=my_msg, fg="black", width=40)
+entry_field = Entry(window, textvariable=my_msg, fg="black", width=40)
 entry_field.pack()
 
-send_Button = Button(window, text="Send", font="NORMAL", fg="black", command=send)
+send_Button = Button(
+    window, text="Send", font="NORMAL", fg="black", command=send)
 send_Button.pack()
 
-quit_Button = Button(window, text="Quit", font="NORMAL", fg="black", command=on_clossing)
+quit_Button = Button(
+    window, text="Quit", font="NORMAL", fg="black", command=on_clossing)
 quit_Button.pack()
 
 Host = '127.0.0.1'
