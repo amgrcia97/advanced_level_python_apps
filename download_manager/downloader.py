@@ -156,6 +156,7 @@ class DowloadApp:
         elif (choices == '2'):
             self.video_type = self.yt.streams.first()
             self.max_file_size = self.video_type.filesize
+            print(self.max_file_size)
 
         self.loading_label = Label(
             self.download_window,
@@ -179,7 +180,7 @@ class DowloadApp:
         self.progress_bar.start()
 
         threading.Thread(
-            target=self.yt.register_on_progress_callback(self.show_progress)).start()
+            target=self.yt.register_on_progress_callback(self.on_progress)).start()
 
         threading.Thread(target=self.download_file).start()
 
@@ -190,30 +191,28 @@ class DowloadApp:
                 only_audio=True).first().download(self.folder_name)
 
         if self.choices == '2':
-            self.yt.streams.first().download(self.folder_name)
-
-    def show_progress(self, streams=None, chunks=None, file_handle=None, bytes_remaining=None):
-
-        print('percent: ')
-        # self.percent_count = (float(abs(bytes_remaining-self.max_file_size)/self.max_file_size))*float(100)
-        # print('percent: ', self.percent_count)
-        print('bytes_remaining: ', int(bytes_remaining))
-        bytes_downloaded = self.max_file_size - int(bytes_remaining)
-        self.percent_count = bytes_downloaded / self.max_file_size * 100
-        print(self.percent_count)
-        
-
-        if (self.percent_count < 100):
-            self.loading_percent_label.config(text=self.percent_count)
             print('downloading')
+            self.yt.streams.filter(progressive=True, file_extension='mp4').first().download(self.folder_name)
+
+    def on_progress(self, stream=None, chunks=None, bytes_remaining=None):
+
+        print('bytes_remaining: ', bytes_remaining)
+        print('total: ', self.max_file_size)
+        self.percent_count = float("%0.2f" % (100-(((bytes_remaining*10)/self.max_file_size))))
+        print('percent: ', self.percent_count)
+
+        if (self.percent_count < 100.00):
+            self.loading_percent_label.config(text=self.percent_count)
+            print('downloading %')
         else:
+            self.loading_percent_label.config(text='100.00 %')
             self.progress_bar.stop()
             self.loading_label.grid_forget()
             self.progress_bar.grid_forget()
 
             self.download_finished = Label(
                 self.download_window,
-                text='Dowload finished!',
+                text='Download finished!',
                 font=('Agency Fb', 30))
             self.download_finished.grid(pady=(150, 0))
 
@@ -223,7 +222,7 @@ class DowloadApp:
                 font=('Terminal', 30))
             self.download_file_name.grid(pady=(50, 0))
 
-            MB = float('%0.2f' % (self.max_file_size/1000000))
+            MB = float('%0.2f' % (self.max_file_size/199399))
 
             self.download_file_size = Label(
                 self.download_window,
