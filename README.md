@@ -5,4 +5,7 @@
 *➡️ Machine Learning Models*
 
 ### Real time applications in python:
+
 ✔️ Chat Room Application
+
+✔️ Email Sender Application
