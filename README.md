@@ -1,4 +1,4 @@
-# Advanced Level Applications in Python #
+# Advanced Level Applications in Python
 
 *➡️ Advance level concepts used to make some applications in Python*
 
@@ -11,3 +11,7 @@
 ✔️ Email Sender Application
 
 ✔️ Youtube Video Download Application
+
+
+
+Course ref: https://www.udemy.com/course/make-20-advanced-level-applications-in-python/
