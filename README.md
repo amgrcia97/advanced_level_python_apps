@@ -10,6 +10,7 @@
 - [x] Email Sender Application
 - [x] Youtube Video Download Application
 - [x] Screen Shoot Application
+- [x] Music Player Application
 
 
 
