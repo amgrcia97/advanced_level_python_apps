@@ -4,13 +4,12 @@
 
 *➡️ Machine Learning Models*
 
-### Real time applications in python:
+### Some Applications developed in Python:
 
-✔️ Chat Room Application
-
-✔️ Email Sender Application
-
-✔️ Youtube Video Download Application
+- [x] Chat Room Application
+- [x] Email Sender Application
+- [x] Youtube Video Download Application
+- [x] Screen Shoot Application
 
 
 
