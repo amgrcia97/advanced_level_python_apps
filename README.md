@@ -14,6 +14,7 @@
 - [x] Movie Booking Application
 - [x] Drawing Application
 - [x] Restaurant Managment Application
+- [x] BMI Calculator Application
 
 
 
