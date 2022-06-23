@@ -13,6 +13,7 @@
 - [x] Music Player Application
 - [x] Movie Booking Application
 - [x] Drawing Application
+- [x] Restaurant Managment Application
 
 
 
