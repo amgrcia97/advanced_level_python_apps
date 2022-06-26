@@ -20,12 +20,6 @@ Y = dataset.iloc[0:, -1].values
 X_train, X_test, Y_train, Y_test = train_test_split(
     X, Y, test_size=0.4, random_state=0)
 
-# X_train1 = np.reshape(X_train, (-1, 1))
-# Y_train1 = np.reshape(Y_train, (-1, 1))
-
-# X_test1 = np.reshape(X_test, (-1, 1))
-# Y_test1 = np.reshape(Y_test, (-1, 1))
-
 lin_regressor = LinearRegression()
 lin_regressor.fit(X_train, Y_train)
 

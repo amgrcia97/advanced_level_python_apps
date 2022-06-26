@@ -61,7 +61,7 @@ def model_train(X_train, Y_train, X_test,  Y_test):
 def visualize_results(X_train1, Y_train1, X_test1,  Y_test1, lin_regressor):
 
     plt.scatter(X_test1, Y_test1, color='blue')
-    plt.plot(X_test1, y_pred, color='red')
+    # plt.plot(X_test1, y_pred, color='red')
     plt.title('Area vs Price of the Land')
     plt.xlabel('Area of the Land in thousand Square Foot')
     plt.title('Price of the Land in Million USD')
