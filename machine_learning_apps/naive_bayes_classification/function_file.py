@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.naive_bayes import GaussianNB  # , MultinomialNB, BernoulliNB
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, confusion_matrix
 
 
