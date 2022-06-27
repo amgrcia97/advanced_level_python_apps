@@ -15,7 +15,7 @@
 - [x] Movie Booking Application
 - [x] Music Player Application
 - [x] PDF Audio Reader Application
-- [x] Restaurant Managment System Application
+- [x] Restaurant Management System Application
 - [x] Screen Shoot Application
 - [x] TIC TAC TOE Game
 - [x] Machine Learning Applications:
