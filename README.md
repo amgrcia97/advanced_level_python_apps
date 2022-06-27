@@ -4,7 +4,7 @@
 
 *➡️ Machine Learning Models*
 
-## Some Applications developed in Python:
+## Some Applications developed:
 
 - [x] BMI Calculator Application
 - [x] Chat Room Application
