@@ -6,7 +6,7 @@ from sklearn.metrics import r2_score
 from sklearn.preprocessing import PolynomialFeatures
 
 def readFile():
-    dataset = pd.read_csv('C:\\Users\\user\\python\\python_apps\\advanced_level_python_apps\\machine_learning_apps\\datasets\\Nova pasta\\baseballplayer.csv')
+    dataset = pd.read_csv('C:\\Users\\user\\python\\python_apps\\advanced_level_python_apps\\machine_learning_apps\\datasets\\baseballplayer.csv')
     X = dataset.iloc[0:, 0].values
     Y = dataset.iloc[0:, -1].values
     return X, Y
